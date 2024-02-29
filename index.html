@@ -4,28 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>D&D Value Converter</title>
-    <style>
-        /* Your CSS styles here */
-    </style>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your styles.css file -->
 </head>
 <body>
-    <h1>D&D Value Converter</h1>
+    <div class="container">
+        <h1>D&D Value Converter</h1>
 
-    <div>
-        <h2>Inch to cm:</h2>
-        <input type="number" id="inchInput" placeholder="Enter inches">
-        <button onclick="convertInchToCm()">Convert</button>
-        <p id="cmOutput"></p>
+        <div>
+            <h2>Inch to cm:</h2>
+            <input type="number" id="inchInput" placeholder="Enter inches">
+            <button onclick="convertInchToCm()">Convert</button>
+            <p id="cmOutput" class="output"></p>
+        </div>
+
+        <div>
+            <h2>Foot to Meter:</h2>
+            <input type="number" id="footInput" placeholder="Enter feet">
+            <button onclick="convertFootToMeter()">Convert</button>
+            <p id="meterOutput" class="output"></p>
+        </div>
+
+        <div>
+            <h2>Currency Converter:</h2>
+            <input type="number" id="amountInput" placeholder="Enter amount">
+            <select id="currencyFrom">
+                <option value="Copper">Copper</option>
+                <option value="Silver">Silver</option>
+                <option value="Electrum">Electrum</option>
+                <option value="Gold">Gold</option>
+                <option value="Platinum">Platinum</option>
+            </select>
+            <span>to</span>
+            <select id="currencyTo">
+                <option value="Copper">Copper</option>
+                <option value="Silver">Silver</option>
+                <option value="Electrum">Electrum</option>
+                <option value="Gold">Gold</option>
+                <option value="Platinum">Platinum</option>
+            </select>
+            <button onclick="convertCurrency()">Convert</button>
+            <p id="currencyOutput" class="output"></p>
+        </div>
     </div>
-
-    <div>
-        <h2>Foot to Meter:</h2>
-        <input type="number" id="footInput" placeholder="Enter feet">
-        <button onclick="convertFootToMeter()">Convert</button>
-        <p id="meterOutput"></p>
-    </div>
-
-    <!-- Other conversion sections -->
 
     <script>
         function convertInchToCm() {
@@ -40,7 +60,26 @@
             document.getElementById('meterOutput').textContent = `${foot} feet is equal to ${meter} meters.`;
         }
 
-        // Other conversion functions
+        function convertCurrency() {
+            const amount = document.getElementById('amountInput').value;
+            const fromCurrency = document.getElementById('currencyFrom').value;
+            const toCurrency = document.getElementById('currencyTo').value;
+            const conversionRate = getConversionRate(fromCurrency, toCurrency);
+            const convertedAmount = amount * conversionRate;
+            document.getElementById('currencyOutput').textContent = `${amount} ${fromCurrency} is equal to ${convertedAmount} ${toCurrency}.`;
+        }
+
+        function getConversionRate(fromCurrency, toCurrency) {
+            // Conversion rates
+            const conversionRates = {
+                "Copper": { "Copper": 1, "Silver": 0.1, "Electrum": 0.02, "Gold": 0.01, "Platinum": 0.001 },
+                "Silver": { "Copper": 10, "Silver": 1, "Electrum": 0.2, "Gold": 0.1, "Platinum": 0.01 },
+                "Electrum": { "Copper": 50, "Silver": 5, "Electrum": 1, "Gold": 0.5, "Platinum": 0.05 },
+                "Gold": { "Copper": 100, "Silver": 10, "Electrum": 2, "Gold": 1, "Platinum": 0.1 },
+                "Platinum": { "Copper": 1000, "Silver": 100, "Electrum": 20, "Gold": 10, "Platinum": 1 }
+            };
+            return conversionRates[fromCurrency][toCurrency];
+        }
     </script>
 </body>
 </html>
