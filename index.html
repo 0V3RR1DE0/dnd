@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&D Value Converter</title>
+    <style>
+        /* Your CSS styles here */
+    </style>
+</head>
+<body>
+    <h1>D&D Value Converter</h1>
+
+    <div>
+        <h2>Inch to cm:</h2>
+        <input type="number" id="inchInput" placeholder="Enter inches">
+        <button onclick="convertInchToCm()">Convert</button>
+        <p id="cmOutput"></p>
+    </div>
+
+    <div>
+        <h2>Foot to Meter:</h2>
+        <input type="number" id="footInput" placeholder="Enter feet">
+        <button onclick="convertFootToMeter()">Convert</button>
+        <p id="meterOutput"></p>
+    </div>
+
+    <!-- Other conversion sections -->
+
+    <script>
+        function convertInchToCm() {
+            const inch = document.getElementById('inchInput').value;
+            const cm = inch * 2.54; // 1 inch = 2.54 cm
+            document.getElementById('cmOutput').textContent = `${inch} inches is equal to ${cm} centimeters.`;
+        }
+
+        function convertFootToMeter() {
+            const foot = document.getElementById('footInput').value;
+            const meter = foot * 0.3048; // 1 foot = 0.3048 meters
+            document.getElementById('meterOutput').textContent = `${foot} feet is equal to ${meter} meters.`;
+        }
+
+        // Other conversion functions
+    </script>
+</body>
+</html>
