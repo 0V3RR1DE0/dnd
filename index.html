@@ -6,7 +6,7 @@
     <title>D&D Value Converter</title>
     <link rel="stylesheet" href="styles.css"> <!-- Link to your styles.css file -->
 </head>
-<body>
+<body onload="resetValues()">
     <div class="container">
         <h1>D&D Value Converter</h1>
 
@@ -79,6 +79,15 @@
                 "Platinum": { "Copper": 1000, "Silver": 100, "Electrum": 20, "Gold": 10, "Platinum": 1 }
             };
             return conversionRates[fromCurrency][toCurrency];
+        }
+
+        function resetValues() {
+            document.getElementById('inchInput').value = '';
+            document.getElementById('footInput').value = '';
+            document.getElementById('amountInput').value = '';
+            document.getElementById('cmOutput').textContent = '';
+            document.getElementById('meterOutput').textContent = '';
+            document.getElementById('currencyOutput').textContent = '';
         }
     </script>
 </body>
