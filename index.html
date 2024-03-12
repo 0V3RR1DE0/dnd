@@ -25,6 +25,15 @@
         </div>
 
         <div>
+            <h2>Pounds to Kilograms:</h2>
+            <input type="number" id="poundInput" placeholder="Enter pounds">
+            <button onclick="convertPoundToKg()">Convert</button>
+            <p id="kgOutput" class="output"></p>
+            <button onclick="convertKgToPound()">Convert Back</button>
+            <p id="poundOutput" class="output"></p>
+        </div>
+
+        <div>
             <h2>Currency Converter:</h2>
             <input type="number" id="amountInput" placeholder="Enter amount">
             <select id="currencyFrom">
@@ -60,6 +69,18 @@
             document.getElementById('meterOutput').textContent = `${foot} feet is equal to ${meter} meters.`;
         }
 
+        function convertPoundToKg() {
+            const pound = document.getElementById('poundInput').value;
+            const kg = pound * 0.453592; // 1 pound = 0.453592 kilograms
+            document.getElementById('kgOutput').textContent = `${pound} pounds is equal to ${kg} kilograms.`;
+        }
+
+        function convertKgToPound() {
+            const kg = document.getElementById('poundInput').value;
+            const pound = kg / 0.453592; // 1 kilogram = 2.20462 pounds
+            document.getElementById('poundOutput').textContent = `${kg} kilograms is equal to ${pound} pounds.`;
+        }
+
         function convertCurrency() {
             const amount = document.getElementById('amountInput').value;
             const fromCurrency = document.getElementById('currencyFrom').value;
@@ -84,9 +105,12 @@
         function resetValues() {
             document.getElementById('inchInput').value = '';
             document.getElementById('footInput').value = '';
+            document.getElementById('poundInput').value = '';
             document.getElementById('amountInput').value = '';
             document.getElementById('cmOutput').textContent = '';
             document.getElementById('meterOutput').textContent = '';
+            document.getElementById('kgOutput').textContent = '';
+            document.getElementById('poundOutput').textContent = '';
             document.getElementById('currencyOutput').textContent = '';
         }
     </script>
