@@ -25,25 +25,29 @@
             <p id="cmOutput" class="output"></p>
         </div>
 
-        <!-- Battlemap Hex/Square Calculator -->
-        <div>
-            <h2>Battlemap Hex/Square Calculator:</h2>
-            <label for="hexSize">Hex Size (feet):</label>
-            <input type="number" id="hexSize" placeholder="Enter hex size in feet">
-            <br>
-            <label for="maxMovement">Max Movement Speed/Range (feet):</label>
-            <input type="number" id="maxMovement" placeholder="Enter max movement speed in feet">
-            <br>
-            <button onclick="calculateMovement()">Convert</button>
-            <p id="movementOutput" class="output"></p>
-        </div>
-
         <!-- Foot to Meter conversion -->
         <div>
             <h2>Foot to Meter:</h2>
             <input type="number" id="footInput" placeholder="Enter feet">
             <button onclick="convertFootToMeter()">Convert</button>
             <p id="meterOutput" class="output"></p>
+        </div>
+
+        <!-- Pounds to Kilograms conversion -->
+        <div>
+            <h2>Pounds to Kilograms:</h2>
+            <input type="number" id="poundInput" placeholder="Enter pounds">
+            <select id="weightFrom">
+                <option value="Pound">Pound</option>
+                <option value="Kilogram">Kilogram</option>
+            </select>
+            <span>to</span>
+            <select id="weightTo">
+                <option value="Pound">Pound</option>
+                <option value="Kilogram">Kilogram</option>
+            </select>
+            <button onclick="convertWeight()">Convert</button>
+            <p id="weightOutput" class="output"></p>
         </div>
 
         <!-- Currency Splitter -->
@@ -67,22 +71,18 @@
             <button onclick="splitCurrency()">Split Currency</button>
             <p id="splitOutput" class="output"></p>
         </div>
-        
-        <!-- Pounds to Kilograms conversion -->
+
+        <!-- Battlemap Hex/Square Calculator -->
         <div>
-            <h2>Pounds to Kilograms:</h2>
-            <input type="number" id="poundInput" placeholder="Enter pounds">
-            <select id="weightFrom">
-                <option value="Pound">Pound</option>
-                <option value="Kilogram">Kilogram</option>
-            </select>
-            <span>to</span>
-            <select id="weightTo">
-                <option value="Pound">Pound</option>
-                <option value="Kilogram">Kilogram</option>
-            </select>
-            <button onclick="convertWeight()">Convert</button>
-            <p id="weightOutput" class="output"></p>
+            <h2>Battlemap Hex/Square Calculator:</h2>
+            <label for="hexSize">Hex Size (feet):</label>
+            <input type="number" id="hexSize" placeholder="Enter hex size in feet">
+            <br>
+            <label for="maxMovement">Max Movement Speed/Range (feet):</label>
+            <input type="number" id="maxMovement" placeholder="Enter max movement speed in feet">
+            <br>
+            <button onclick="calculateMovement()">Convert</button>
+            <p id="movementOutput" class="output"></p>
         </div>
 
         <!-- Currency Converter -->
