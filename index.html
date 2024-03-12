@@ -23,6 +23,18 @@
         </div>
 
         <div>
+            <h2>Battlemap Hex/Square Calculator:</h2>
+            <label for="hexSize">Hex Size (feet):</label>
+            <input type="number" id="hexSize" placeholder="Enter hex size in feet">
+            <br>
+            <label for="maxMovement">Max Movement Speed (feet):</label>
+            <input type="number" id="maxMovement" placeholder="Enter max movement speed in feet">
+            <br>
+            <button onclick="calculateMovement()">Calculate</button>
+            <p id="movementOutput" class="output"></p>
+        </div>
+
+        <div>
             <h2>Foot to Meter:</h2>
             <input type="number" id="footInput" placeholder="Enter feet">
             <button onclick="convertFootToMeter()">Convert</button>
@@ -150,6 +162,19 @@
             document.getElementById('converterPage').style.display = 'none';
             document.getElementById('infoPage').style.display = 'block';
         }
+
+        function calculateMovement() {
+            const hexSize = parseFloat(document.getElementById('hexSize').value);
+            const maxMovement = parseFloat(document.getElementById('maxMovement').value);
+
+            if (isNaN(hexSize) || isNaN(maxMovement) || hexSize <= 0 || maxMovement <= 0) {
+        document.getElementById('movementOutput').textContent = "Please enter valid numbers for hex size and max movement speed.";
+        return;
+    }
+
+    const hexesOrSquares = Math.floor(maxMovement / hexSize);
+    document.getElementById('movementOutput').textContent = `With a hex size of ${hexSize} feet and a max movement speed of ${maxMovement} feet, you can move ${hexesOrSquares} squares/hexes.`;
+}
     </script>
 </body>
 </html>
