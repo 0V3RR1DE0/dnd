@@ -220,19 +220,54 @@
         }
 
         // Function to split currency among party members
-        function splitCurrency() {
-            const partyMembers = parseInt(document.getElementById('partyMembers').value);
-            const totalCurrency = parseInt(document.getElementById('totalCurrency').value);
-            const currencyType = document.getElementById('currencyType').value;
+            function splitCurrency() {
+                const partyMembers = parseInt(document.getElementById('partyMembers').value);
+                const totalCurrency = parseInt(document.getElementById('totalCurrency').value);
+                const currencyType = document.getElementById('currencyType').value;
 
-            if (isNaN(partyMembers) || isNaN(totalCurrency) || partyMembers <= 0 || totalCurrency <= 0) {
-                document.getElementById('splitOutput').textContent = "Please enter valid numbers for party members and total currency value.";
-                return;
+                if (isNaN(partyMembers) || isNaN(totalCurrency) || partyMembers <= 0 || totalCurrency <= 0) {
+                    document.getElementById('splitOutput').textContent = "Please enter valid numbers for party members and total currency value.";
+                    return;
+                }
+
+                // Calculate the share per member
+                const sharePerMember = totalCurrency / partyMembers;
+
+                // Convert total currency value to platinum
+                let platinum = Math.floor(totalCurrency / 1000);
+                let remainingGold = totalCurrency % 1000;
+
+                // Convert remaining gold to gold
+                let gold = Math.floor(remainingGold / 100);
+                let remainingElectrum = remainingGold % 100;
+
+                // Convert remaining electrum to electrum
+                let electrum = Math.floor(remainingElectrum / 50);
+                let remainingSilver = remainingElectrum % 50;
+
+                // Convert remaining silver to silver
+                let silver = Math.floor(remainingSilver / 10);
+
+                // Remaining is copper
+                let copper = remainingSilver % 10;
+
+                // Divide each currency by the number of party members
+                platinum = platinum / partyMembers;
+                gold = gold / partyMembers;
+                electrum = electrum / partyMembers;
+                silver = silver / partyMembers;
+                copper = copper / partyMembers;
+
+                // Display the result
+                document.getElementById('splitOutput').innerHTML = `
+                    With ${partyMembers} party members and a total currency value of ${totalCurrency} ${currencyType}, each member receives:<br>
+                    ${platinum.toFixed(2)} Platinum<br>
+                    ${gold.toFixed(2)} Gold<br>
+                    ${electrum.toFixed(2)} Electrum<br>
+                    ${silver.toFixed(2)} Silver<br>
+                    ${copper.toFixed(2)} Copper.<br>
+                `;
             }
-
-            const sharePerMember = totalCurrency / partyMembers;
-            document.getElementById('splitOutput').textContent = `With ${partyMembers} party members and a total currency value of ${totalCurrency} ${currencyType}, each member receives ${sharePerMember} ${currencyType}.`;
-        }
     </script>
 </body>
 </html>
