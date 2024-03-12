@@ -7,7 +7,12 @@
     <link rel="stylesheet" href="styles.css"> <!-- Link to your styles.css file -->
 </head>
 <body onload="resetValues()">
-    <div class="container">
+    <div class="navbar">
+        <a href="#" onclick="showConverter()">Converter</a>
+        <a href="#" onclick="showInfo()">Info</a>
+    </div>
+
+    <div id="converterPage" class="container">
         <h1>D&D Value Converter</h1>
 
         <div>
@@ -27,10 +32,17 @@
         <div>
             <h2>Pounds to Kilograms:</h2>
             <input type="number" id="poundInput" placeholder="Enter pounds">
-            <button onclick="convertPoundToKg()">Convert</button>
-            <p id="kgOutput" class="output"></p>
-            <button onclick="convertKgToPound()">Convert Back</button>
-            <p id="poundOutput" class="output"></p>
+            <select id="weightFrom">
+                <option value="Pound">Pound</option>
+                <option value="Kilogram">Kilogram</option>
+            </select>
+            <span>to</span>
+            <select id="weightTo">
+                <option value="Pound">Pound</option>
+                <option value="Kilogram">Kilogram</option>
+            </select>
+            <button onclick="convertWeight()">Convert</button>
+            <p id="weightOutput" class="output"></p>
         </div>
 
         <div>
@@ -56,6 +68,20 @@
         </div>
     </div>
 
+    <div id="infoPage" class="container" style="display: none;">
+        <h1>D&D Value Converter - Info</h1>
+        
+        <h2>Useful Links:</h2>
+        <ul>
+            <li><a href="https://www.dndbeyond.com/">D&D Beyond</a></li>
+            <li><a href="https://www.dnd5e.com/">D&D 5e</a></li>
+            <li><a href="https://roll20.net/">Roll20</a></li>
+            <!-- Add more links as needed -->
+        </ul>
+
+        <p>Additional information about D&D and other related resources can be added here.</p>
+    </div>
+
     <script>
         function convertInchToCm() {
             const inch = document.getElementById('inchInput').value;
@@ -69,16 +95,19 @@
             document.getElementById('meterOutput').textContent = `${foot} feet is equal to ${meter} meters.`;
         }
 
-        function convertPoundToKg() {
-            const pound = document.getElementById('poundInput').value;
-            const kg = pound * 0.453592; // 1 pound = 0.453592 kilograms
-            document.getElementById('kgOutput').textContent = `${pound} pounds is equal to ${kg} kilograms.`;
-        }
-
-        function convertKgToPound() {
-            const kg = document.getElementById('poundInput').value;
-            const pound = kg / 0.453592; // 1 kilogram = 2.20462 pounds
-            document.getElementById('poundOutput').textContent = `${kg} kilograms is equal to ${pound} pounds.`;
+        function convertWeight() {
+            const weight = document.getElementById('poundInput').value;
+            const fromUnit = document.getElementById('weightFrom').value;
+            const toUnit = document.getElementById('weightTo').value;
+            
+            let result;
+            if (fromUnit === 'Pound' && toUnit === 'Kilogram') {
+                result = weight * 0.453592; // 1 pound = 0.453592 kilograms
+            } else if (fromUnit === 'Kilogram' && toUnit === 'Pound') {
+                result = weight / 0.453592; // 1 kilogram = 2.20462 pounds
+            }
+            
+            document.getElementById('weightOutput').textContent = `${weight} ${fromUnit} is equal to ${result} ${toUnit}.`;
         }
 
         function convertCurrency() {
@@ -109,9 +138,18 @@
             document.getElementById('amountInput').value = '';
             document.getElementById('cmOutput').textContent = '';
             document.getElementById('meterOutput').textContent = '';
-            document.getElementById('kgOutput').textContent = '';
-            document.getElementById('poundOutput').textContent = '';
+            document.getElementById('weightOutput').textContent = '';
             document.getElementById('currencyOutput').textContent = '';
+        }
+
+        function showConverter() {
+            document.getElementById('converterPage').style.display = 'block';
+            document.getElementById('infoPage').style.display = 'none';
+        }
+
+        function showInfo() {
+            document.getElementById('converterPage').style.display = 'none';
+            document.getElementById('infoPage').style.display = 'block';
         }
     </script>
 </body>
