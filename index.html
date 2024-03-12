@@ -168,15 +168,15 @@
             document.getElementById('currencyOutput').textContent = `${amount} ${fromCurrency} is equal to ${convertedAmount} ${toCurrency}.`;
         }
 
-         // Function to get conversion rate between currency units
+        // Function to get conversion rate between currency units
         function getConversionRate(fromCurrency, toCurrency) {
             // Conversion rates
             const conversionRates = {
-                "Copper": { "Copper": 1, "Silver": 10, "Electrum": 50, "Gold": 100, "Platinum": 1000 },
-                "Silver": { "Copper": 0.1, "Silver": 1, "Electrum": 5, "Gold": 10, "Platinum": 100 },
-                "Electrum": { "Copper": 0.02, "Silver": 0.2, "Electrum": 1, "Gold": 2, "Platinum": 20 },
-                "Gold": { "Copper": 0.01, "Silver": 0.1, "Electrum": 0.5, "Gold": 1, "Platinum": 10 },
-                "Platinum": { "Copper": 0.001, "Silver": 0.01, "Electrum": 0.05, "Gold": 0.1, "Platinum": 1 }
+                "Copper": { "Copper": 1, "Silver": 1 / 10, "Electrum": 1 / 50, "Gold": 1 / 100, "Platinum": 1 / 1000 },
+                "Silver": { "Copper": 10, "Silver": 1, "Electrum": 1 / 5, "Gold": 1 / 10, "Platinum": 1 / 100 },
+                "Electrum": { "Copper": 50, "Silver": 5, "Electrum": 1, "Gold": 1 / 2, "Platinum": 1 / 20 },
+                "Gold": { "Copper": 100, "Silver": 10, "Electrum": 2, "Gold": 1, "Platinum": 1 / 10 },
+                "Platinum": { "Copper": 1000, "Silver": 100, "Electrum": 20, "Gold": 10, "Platinum": 1 }
             };
             return conversionRates[fromCurrency][toCurrency];
         }
