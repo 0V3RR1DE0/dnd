@@ -7,14 +7,17 @@
     <link rel="stylesheet" href="styles.css"> <!-- Link to your styles.css file -->
 </head>
 <body onload="resetValues()">
+    <!-- Navigation bar -->
     <div class="navbar">
-        <a href="#" onclick="showConverter()">Converter</a>
-        <a href="#" onclick="showInfo()">Info</a>
+        <a href="#" onclick="showConverter()">Converter</a> <!-- Link to switch to the converter page -->
+        <a href="#" onclick="showInfo()">Info</a> <!-- Link to switch to the info page -->
     </div>
-
+    
+    <!-- Converter page -->
     <div id="converterPage" class="container">
         <h1>D&D Value Converter</h1>
 
+        <!-- Inch to cm conversion -->
         <div>
             <h2>Inch to cm:</h2>
             <input type="number" id="inchInput" placeholder="Enter inches">
@@ -22,6 +25,7 @@
             <p id="cmOutput" class="output"></p>
         </div>
 
+        <!-- Battlemap Hex/Square Calculator -->
         <div>
             <h2>Battlemap Hex/Square Calculator:</h2>
             <label for="hexSize">Hex Size (feet):</label>
@@ -34,6 +38,7 @@
             <p id="movementOutput" class="output"></p>
         </div>
 
+        <!-- Foot to Meter conversion -->
         <div>
             <h2>Foot to Meter:</h2>
             <input type="number" id="footInput" placeholder="Enter feet">
@@ -41,6 +46,7 @@
             <p id="meterOutput" class="output"></p>
         </div>
 
+        <!-- Currency Splitter -->
         <div>
             <h2>Currency Splitter:</h2>
             <label for="partyMembers">Number of Party Members:</label>
@@ -62,6 +68,7 @@
             <p id="splitOutput" class="output"></p>
         </div>
         
+        <!-- Pounds to Kilograms conversion -->
         <div>
             <h2>Pounds to Kilograms:</h2>
             <input type="number" id="poundInput" placeholder="Enter pounds">
@@ -78,6 +85,7 @@
             <p id="weightOutput" class="output"></p>
         </div>
 
+        <!-- Currency Converter -->
         <div>
             <h2>Currency Converter:</h2>
             <input type="number" id="amountInput" placeholder="Enter amount">
@@ -101,6 +109,7 @@
         </div>
     </div>
 
+    <!-- Info page -->
     <div id="infoPage" class="container" style="display: none;">
         <h1>D&D Useful Links</h1>
         
@@ -117,19 +126,23 @@
         <p>Additional information about D&D and other related resources can be added here.</p>
     </div>
 
+    <!-- JavaScript code for conversions and functionality -->
     <script>
+        // Function to convert inches to centimeters
         function convertInchToCm() {
             const inch = document.getElementById('inchInput').value;
             const cm = inch * 2.54; // 1 inch = 2.54 cm
             document.getElementById('cmOutput').textContent = `${inch} inches is equal to ${cm} centimeters.`;
         }
 
+        // Function to convert feet to meters
         function convertFootToMeter() {
             const foot = document.getElementById('footInput').value;
             const meter = foot * 0.3048; // 1 foot = 0.3048 meters
             document.getElementById('meterOutput').textContent = `${foot} feet is equal to ${meter} meters.`;
         }
 
+        // Function to convert weight between pounds and kilograms
         function convertWeight() {
             const weight = document.getElementById('poundInput').value;
             const fromUnit = document.getElementById('weightFrom').value;
@@ -145,6 +158,7 @@
             document.getElementById('weightOutput').textContent = `${weight} ${fromUnit} is equal to ${result} ${toUnit}.`;
         }
 
+        // Function to convert currency between different units
         function convertCurrency() {
             const amount = document.getElementById('amountInput').value;
             const fromCurrency = document.getElementById('currencyFrom').value;
@@ -154,6 +168,7 @@
             document.getElementById('currencyOutput').textContent = `${amount} ${fromCurrency} is equal to ${convertedAmount} ${toCurrency}.`;
         }
 
+        // Function to get conversion rate between currency units
         function getConversionRate(fromCurrency, toCurrency) {
             // Conversion rates
             const conversionRates = {
@@ -166,6 +181,7 @@
             return conversionRates[fromCurrency][toCurrency];
         }
 
+        // Function to reset input values
         function resetValues() {
             document.getElementById('inchInput').value = '';
             document.getElementById('footInput').value = '';
@@ -177,16 +193,19 @@
             document.getElementById('currencyOutput').textContent = '';
         }
 
+        // Function to switch to the converter page
         function showConverter() {
             document.getElementById('converterPage').style.display = 'block';
             document.getElementById('infoPage').style.display = 'none';
         }
 
+        // Function to switch to the info page
         function showInfo() {
             document.getElementById('converterPage').style.display = 'none';
             document.getElementById('infoPage').style.display = 'block';
         }
 
+        // Function to calculate movement on a battlemap
         function calculateMovement() {
             const hexSize = parseFloat(document.getElementById('hexSize').value);
             const maxMovement = parseFloat(document.getElementById('maxMovement').value);
@@ -200,6 +219,7 @@
             document.getElementById('movementOutput').textContent = `With a hex size of ${hexSize} feet and a max movement speed of ${maxMovement} feet, you can move ${hexesOrSquares} squares/hexes.`;
         }
 
+        // Function to split currency among party members
         function splitCurrency() {
             const partyMembers = parseInt(document.getElementById('partyMembers').value);
             const totalCurrency = parseInt(document.getElementById('totalCurrency').value);
