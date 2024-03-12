@@ -168,15 +168,15 @@
             document.getElementById('currencyOutput').textContent = `${amount} ${fromCurrency} is equal to ${convertedAmount} ${toCurrency}.`;
         }
 
-        // Function to get conversion rate between currency units
+         // Function to get conversion rate between currency units
         function getConversionRate(fromCurrency, toCurrency) {
             // Conversion rates
             const conversionRates = {
-                "Copper": { "Copper": 1, "Silver": 0.1, "Electrum": 0.02, "Gold": 0.01, "Platinum": 0.001 },
-                "Silver": { "Copper": 10, "Silver": 1, "Electrum": 0.2, "Gold": 0.1, "Platinum": 0.01 },
-                "Electrum": { "Copper": 50, "Silver": 5, "Electrum": 1, "Gold": 0.5, "Platinum": 0.05 },
-                "Gold": { "Copper": 100, "Silver": 10, "Electrum": 2, "Gold": 1, "Platinum": 0.1 },
-                "Platinum": { "Copper": 1000, "Silver": 100, "Electrum": 20, "Gold": 10, "Platinum": 1 }
+                "Copper": { "Copper": 1, "Silver": 10, "Electrum": 50, "Gold": 100, "Platinum": 1000 },
+                "Silver": { "Copper": 0.1, "Silver": 1, "Electrum": 5, "Gold": 10, "Platinum": 100 },
+                "Electrum": { "Copper": 0.02, "Silver": 0.2, "Electrum": 1, "Gold": 2, "Platinum": 20 },
+                "Gold": { "Copper": 0.01, "Silver": 0.1, "Electrum": 0.5, "Gold": 1, "Platinum": 10 },
+                "Platinum": { "Copper": 0.001, "Silver": 0.01, "Electrum": 0.05, "Gold": 0.1, "Platinum": 1 }
             };
             return conversionRates[fromCurrency][toCurrency];
         }
@@ -220,7 +220,7 @@
         }
 
         // Function to split currency among party members
-        function splitCurrency() {
+         function splitCurrency() {
             const partyMembers = parseInt(document.getElementById('partyMembers').value);
             const totalCurrency = parseInt(document.getElementById('totalCurrency').value);
             const currencyType = document.getElementById('currencyType').value;
@@ -233,39 +233,24 @@
             // Calculate the share per member
             const sharePerMember = totalCurrency / partyMembers;
 
-            // Convert total currency value to platinum
-            let platinum = Math.floor(totalCurrency / 1000);
-            let remainingGold = totalCurrency % 1000;
-
-            // Convert remaining gold to gold
-            let gold = Math.floor(remainingGold / 100);
-            let remainingElectrum = remainingGold % 100;
-
-            // Convert remaining electrum to electrum
-            let electrum = Math.floor(remainingElectrum / 50);
-            let remainingSilver = remainingElectrum % 50;
-
-            // Convert remaining silver to silver
-            let silver = Math.floor(remainingSilver / 10);
-
-            // Remaining is copper
-            let copper = remainingSilver % 10;
-
-            // Divide each currency by the number of party members
-            platinum = Math.floor(platinum / partyMembers);
-            gold = Math.floor(gold / partyMembers);
-            electrum = Math.floor(electrum / partyMembers);
-            silver = Math.floor(silver / partyMembers);
-            copper = Math.floor(copper / partyMembers);
+            // Convert share per member to each currency type
+            let platinum = Math.floor(sharePerMember / 10);
+            let remainingGold = sharePerMember % 10;
+            let gold = Math.floor(remainingGold);
+            let remainingElectrum = (remainingGold - gold) * 2;
+            let electrum = Math.floor(remainingElectrum);
+            let remainingSilver = (remainingElectrum - electrum) * 5;
+            let silver = Math.floor(remainingSilver);
+            let copper = Math.round((remainingSilver - silver) * 10);
 
             // Display the result
             document.getElementById('splitOutput').innerHTML = `
-                With ${partyMembers} party members and a total currency value of ${totalCurrency} ${currencyType}, each member receives:<br>
-                ${platinum} Platinum<br>
-                ${gold} Gold<br>
-                ${electrum} Electrum<br>
-                ${silver} Silver<br>
-                ${copper} Copper.<br>
+                    With ${partyMembers} party members and a total currency value of ${totalCurrency} ${currencyType}, each member receives:<br>
+                    ${platinum} Platinum<br>
+                    ${gold} Gold<br>
+                    ${electrum} Electrum<br>
+                    ${silver} Silver<br>
+                    ${copper} Copper.<br>
             `;
         }
     </script>
