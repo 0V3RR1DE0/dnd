@@ -103,18 +103,16 @@ span {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.info a.wikidot {
-    color: #FF9800;
+.info a {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #4caf50;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
 }
 
-.info a.wikidot:hover {
-    color: #e68a00;
-}
-
-.info a.roll20 {
-    color: #9C27B0;
-}
-
-.info a.roll20:hover {
-    color: #7b1fa2;
+.info a:hover {
+    background-color: #45a049;
 }
