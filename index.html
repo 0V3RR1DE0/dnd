@@ -27,10 +27,10 @@
             <label for="hexSize">Hex Size (feet):</label>
             <input type="number" id="hexSize" placeholder="Enter hex size in feet">
             <br>
-            <label for="maxMovement">Max Movement Speed (feet):</label>
+            <label for="maxMovement">Max Movement Speed/Range (feet):</label>
             <input type="number" id="maxMovement" placeholder="Enter max movement speed in feet">
             <br>
-            <button onclick="calculateMovement()">Calculate</button>
+            <button onclick="calculateMovement()">Convert</button>
             <p id="movementOutput" class="output"></p>
         </div>
 
@@ -41,6 +41,27 @@
             <p id="meterOutput" class="output"></p>
         </div>
 
+        <div>
+            <h2>Currency Splitter:</h2>
+            <label for="partyMembers">Number of Party Members:</label>
+            <input type="number" id="partyMembers" placeholder="Enter number of party members">
+            <br>
+            <label for="totalCurrency">Total Currency Value:</label>
+            <input type="number" id="totalCurrency" placeholder="Enter total currency value">
+            <br>
+            <label for="currencyType">Currency Type:</label>
+            <select id="currencyType">
+                <option value="Copper">Copper</option>
+                <option value="Silver">Silver</option>
+                <option value="Electrum">Electrum</option>
+                <option value="Gold">Gold</option>
+                <option value="Platinum">Platinum</option>
+            </select>
+            <br>
+            <button onclick="splitCurrency()">Split Currency</button>
+            <p id="splitOutput" class="output"></p>
+        </div>
+        
         <div>
             <h2>Pounds to Kilograms:</h2>
             <input type="number" id="poundInput" placeholder="Enter pounds">
@@ -86,7 +107,10 @@
         <h2>Useful Links:</h2>
         <ul>
             <li><a href="https://dnd5e.wikidot.com/">D&D Wikidot 5e</a></li>
+            <br>
             <li><a href="https://roll20.net/">Roll20</a></li>
+            <br>
+            <li><a href="https://dndbeyond.com/">D&D Beyond</a></li>
             <!-- Add more links as needed -->
         </ul>
 
@@ -168,13 +192,27 @@
             const maxMovement = parseFloat(document.getElementById('maxMovement').value);
 
             if (isNaN(hexSize) || isNaN(maxMovement) || hexSize <= 0 || maxMovement <= 0) {
-        document.getElementById('movementOutput').textContent = "Please enter valid numbers for hex size and max movement speed.";
-        return;
-    }
+                document.getElementById('movementOutput').textContent = "Please enter valid numbers for hex size and max movement speed.";
+                return;
+            }
 
-    const hexesOrSquares = Math.floor(maxMovement / hexSize);
-    document.getElementById('movementOutput').textContent = `With a hex size of ${hexSize} feet and a max movement speed of ${maxMovement} feet, you can move ${hexesOrSquares} squares/hexes.`;
-}
+            const hexesOrSquares = Math.floor(maxMovement / hexSize);
+            document.getElementById('movementOutput').textContent = `With a hex size of ${hexSize} feet and a max movement speed of ${maxMovement} feet, you can move ${hexesOrSquares} squares/hexes.`;
+        }
+
+        function splitCurrency() {
+            const partyMembers = parseInt(document.getElementById('partyMembers').value);
+            const totalCurrency = parseInt(document.getElementById('totalCurrency').value);
+            const currencyType = document.getElementById('currencyType').value;
+
+            if (isNaN(partyMembers) || isNaN(totalCurrency) || partyMembers <= 0 || totalCurrency <= 0) {
+                document.getElementById('splitOutput').textContent = "Please enter valid numbers for party members and total currency value.";
+                return;
+            }
+
+            const sharePerMember = totalCurrency / partyMembers;
+            document.getElementById('splitOutput').textContent = `With ${partyMembers} party members and a total currency value of ${totalCurrency} ${currencyType}, each member receives ${sharePerMember} ${currencyType}.`;
+        }
     </script>
 </body>
 </html>
